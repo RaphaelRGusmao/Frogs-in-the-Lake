@@ -62,12 +62,30 @@ void simulate (int N, int M)
 
 /******************************************************************************/
 // Funcao principal
-int main ()
+// Recebe o número de rãns (N) e o número de sapos (M)
+int main (int argc, char const *argv[])
 {
-    int N = 3; // Ras   (gender: 0)
-    int M = 3; // Sapos (gender: 1)
+    if (argc < 2) {
+        printf("Número insuficientes de argumentos\n");
+        return -1;
+    }
+    int nm[2];
+    char *p;
+    for (int i = 0; i < 2; i++) {
+        errno = 0;
+        long conv = strtol(argv[i+1], &p, 10);
+        if (errno != 0 || *p != '\0' || conv > INT_MAX) {
+            printf("Erro ao converter argumentos para int\n");
+            return(1);
+        } else {
+            nm[i] = conv;    
+        }
+    }
 
-    simulate(N, M);
+    // nm[0]  Ras   (gender: 0)
+    // nm[1]  Sapos (gender: 1)
+
+    simulate(nm[0], nm[1]);
 
     return 0;
 }

@@ -11,6 +11,12 @@
 #ifndef LAKE_H
 #define LAKE_H
 
+#ifdef VERBOSE
+    #define V(X) X
+#else
+    #define V(X)
+#endif
+
 #include "frog.h"
 using namespace std;
 
@@ -27,9 +33,11 @@ class Lake {
 public:
     vector<Frog> frogs;    // Vetor de sapos
     int *stone;            // Vetor de pedras
+    int N;                 // Número de ras
+    int M;                 // Número de sapos
     int length;            // Tamanho da lagoa
     /**************************************************************************/
-    Lake (int len);                        // Construtor
+    Lake (int N, int M);                        // Construtor
     void show ();                          // Exibe a lagoa
     void set_frogs (vector<Frog> &_frogs); // Define o vetor de sapos
     void set_position (int id, int pos);   // Coloca o sapo id na posicao pos

@@ -19,7 +19,7 @@ class Frog {
 public:
     Lake *lake; // Lagoa
     int id;     // ID do sapo
-    int gender; // Genero (Ra:1, Sapo:-1)
+    int gender; // Genero (Ra:0, Sapo:1)
     int pos;    // Posicao do sapo na lagoa
     /**************************************************************************/
     Frog (int _id, int _gender, int _pos); // Construtor

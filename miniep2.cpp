@@ -7,20 +7,22 @@
  *                      Marcelo Schmitt   - NUSP ???????                      *
  *                      Raphael R. Gusmao - NUSP 9778561                      *
  ******************************************************************************/
-
 #include <bits/stdc++.h>
 #include "lake.h"
 #include "frog.h"
 using namespace std;
 
+// #define VERBOSE
+
+
 /******************************************************************************/
 // Realiza a simulacao
-void simulate (int N, int M)
+int simulate (int N, int M)
 {
-    cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Inicio ]" << END << endl;
+    V(cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Inicio ]" << END << endl;)
 
     // Inicializa a lagoa e cria os sapos
-    Lake lake(N+M+1);
+    Lake lake(N, M);
     vector<Frog> frogs;
     for (int i = 0; i < N; i++) { // Ras
         Frog frog(i, 0, i);
@@ -36,13 +38,13 @@ void simulate (int N, int M)
     }
     lake.set_frogs(frogs);
 
-    lake.show();                                                                // TODO
+    V(lake.show();)                                                                // TODO
 
     // Cria as threads
     vector<pthread_t> threads(N+M);
     for (int i = 0; i < N+M; i++) {
         if (pthread_create(&threads[i], NULL, FROG_thread, &frogs[i])) {
-           cout << YELLOW << "Error creating thread " << i << END << endl;
+           V(cout << YELLOW << "Error creating thread " << i << END << endl;)
            exit(-1);
         }
     }
@@ -50,19 +52,46 @@ void simulate (int N, int M)
     // Espera as threads terminarem de executar
     for (int i = 0; i < N+M; i++) {
         if (pthread_join(threads[i], NULL)) {
-           cout << YELLOW << "Error joining thread " << i << END << endl;
+           V(cout << YELLOW << "Error joining thread " << i << END << endl;)
            exit(-1);
         }
     }
 
-    lake.show();                                                                // TODO
+    V(lake.show();)                                                                // TODO
 
-    cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Fim ]" << END << endl;
+    V(cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Fim ]" << END << endl;)
+
+    // Checa se a lagoa está no estado ideal (ras e sapos trocaram de lugar)
+    int ideal = 1;
+    for (int i = 0; i < lake.length; i++) {
+        if (i < lake.M) {
+            // parte esquerda da lagoa, onde deve haver apenas sapos
+            if (lake.stone[i] == -1 || lake.frogs[lake.stone[i]].gender != 1) {
+                ideal = 0;
+                break;
+            }
+        }
+        if (i == lake.M && lake.stone[i] != -1) {
+            // há um animal no meio da lagoa
+            ideal = 0;
+            break;
+        }
+        if (i > lake.M) {
+            // parte direita da lagora, onde deve haver apenas ras
+            if (lake.stone[i] == -1 || lake.frogs[lake.stone[i]].gender != 0) {
+                ideal = 0;
+                break;
+            }
+        }
+    }
+    // Retorna 1 se o programa terminou em um estado ideal (solução)
+    // Retorna 0 se o programa terminou em un estado não ideal
+    return ideal;
 }
 
 /******************************************************************************/
 // Funcao principal
-// Recebe o número de rãns (N) e o número de sapos (M)
+// Recebe o número de rãs (N) e o número de sapos (M), nesta ordem
 int main (int argc, char const *argv[])
 {
     if (argc < 2) {
@@ -85,9 +114,10 @@ int main (int argc, char const *argv[])
     // nm[0]  Ras   (gender: 0)
     // nm[1]  Sapos (gender: 1)
 
-    simulate(nm[0], nm[1]);
+    return simulate(nm[0], nm[1]);
 
-    return 0;
+
+    // return 0;
 }
 
 /******************************************************************************/

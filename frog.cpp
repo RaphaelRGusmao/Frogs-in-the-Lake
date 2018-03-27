@@ -60,7 +60,7 @@ void FROG_move_sync (Lake *lake)
 {
     // Somente a ultima thread a sincronizar entra no if
     if (lake->wait() == PTHREAD_BARRIER_SERIAL_THREAD) {
-        cout << "------------------------------------------" << endl;
+        V(cout << "------------------------------------------" << endl;)
 
         // Arbitro global
         game_over = 1;
@@ -79,16 +79,16 @@ void *FROG_thread (void *p_frog)
     Frog frog = *((Frog*)p_frog);
     while (1) {
         frog.lake->lock(); // --------------------------- Inicio da area critica
-        cout << endl << "* Sapo " << frog.id << endl;                           // TODO
+        V(cout << endl << "* Sapo " << frog.id << endl;)                           // TODO
         int dist = frog.can_move();
         if (dist != 0) {
-            cout << "  De " << frog.pos << " para " << frog.pos+dist << endl;   // TODO
+            V(cout << "  De " << frog.pos << " para " << frog.pos+dist << endl;)   // TODO
             frog.move(dist);
-            frog.lake->show();
+            V(frog.lake->show();)
             contador = 0;
         } else {
             contador++;
-            cout << "  Parado - contador: " << contador << endl;                // TODO
+            V(cout << "  Parado - contador: " << contador << endl;)                // TODO
         }
         frog.lake->unlock(); // ---------------------------- Fim da area critica
 
@@ -97,6 +97,7 @@ void *FROG_thread (void *p_frog)
 
         if (game_over) break;
     }
+    pthread_exit(0);
 }
 
 /******************************************************************************/

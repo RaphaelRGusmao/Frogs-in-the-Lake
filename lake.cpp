@@ -17,9 +17,11 @@ static pthread_barrier_t barrier; // Barreira de sincronizacao
 static pthread_mutex_t mutex;     // Semaforo
 
 /******************************************************************************/
-Lake::Lake (int _length)
+Lake::Lake (int _N, int _M)
 {
-    length = _length;
+    N = _N;
+    M = _M;
+    length = N + M + 1;
     stone = new int[length];
     for (int i = 0; i < length; i++) {
         stone[i] = -1;

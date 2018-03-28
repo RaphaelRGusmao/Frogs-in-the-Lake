@@ -4,18 +4,23 @@
  *                                                                            *
  *                                   Lagoa                                    *
  *                                                                            *
- *                      Marcelo Schmitt   - NUSP ???????                      *
+ *                      Marcelo Schmitt   - NUSP 9297641                      *
  *                      Raphael R. Gusmao - NUSP 9778561                      *
  ******************************************************************************/
 
 #ifndef LAKE_H
 #define LAKE_H
 
+// #define VERBOSE
+
 #ifdef VERBOSE
     #define V(X) X
 #else
     #define V(X)
 #endif
+
+// variável global indicadora de se deve ou não imprimir o estado final do programa
+static int silent = 0;
 
 #include "frog.h"
 using namespace std;

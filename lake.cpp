@@ -4,7 +4,7 @@
  *                                                                            *
  *                                   Lagoa                                    *
  *                                                                            *
- *                      Marcelo Schmitt   - NUSP ???????                      *
+ *                      Marcelo Schmitt   - NUSP 9297641                      *
  *                      Raphael R. Gusmao - NUSP 9778561                      *
  ******************************************************************************/
 

@@ -4,7 +4,7 @@
  *                                                                            *
  *                                    Sapo                                    *
  *                                                                            *
- *                      Marcelo Schmitt   - NUSP ???????                      *
+ *                      Marcelo Schmitt   - NUSP 9297641                      *
  *                      Raphael R. Gusmao - NUSP 9778561                      *
  ******************************************************************************/
 
@@ -14,6 +14,7 @@
 using namespace std;
 
 static int contador = 0;  // Contador global
+// static const int max_dead_lock;
 static int game_over = 0; // Indicador de fim de jogo
 
 /******************************************************************************/
@@ -68,7 +69,12 @@ void FROG_move_sync (Lake *lake)
             if (lake->frogs[i].can_move()) game_over = 0;
         }
 
-        if (contador > lake->length-2) game_over = 1;
+        if (contador > (lake->length-2)*2) {
+            game_over = 1;
+            if (!silent) {
+                printf("Número de tentativas que o programa ficou em deadlock: %d\n", (lake->length-2)*2);
+            }
+        }
     }
     lake->wait();
 }

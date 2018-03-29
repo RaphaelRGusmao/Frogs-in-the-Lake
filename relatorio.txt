@@ -8,6 +8,14 @@
 #                       Raphael R. Gusmao - NUSP 9778561                       #
 ################################################################################
 
+O MiniEP2 recebe como argumentos o numero de ras (N) e o numero de sapos (M), 
+nesta ordem.
+
+Para executar o MiniEP2 no terminal, digite:
+    $ make
+    $ ./miniep2 3 3
+    ou
+    $ make run
 
 O programa para por duas condicoes: 
 1- Nenhuma thread pode prosseguir

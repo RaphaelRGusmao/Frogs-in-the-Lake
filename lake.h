@@ -35,10 +35,10 @@ class Lake {
 public:
     vector<Frog> frogs;    // Vetor de sapos
     int *stone;            // Vetor de pedras
-    int N;                 // Número de ras
-    int M;                 // Número de sapos
+    int N;                 // Numero de ras
+    int M;                 // Numero de sapos
     int length;            // Tamanho da lagoa
-    int silent;            // Se não deve imprimir informações adicionais
+    int silent;            // Se nao deve imprimir informacoes adicionais
     /**************************************************************************/
     Lake (int N, int M);                   // Construtor
     void show ();                          // Exibe a lagoa

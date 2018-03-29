@@ -24,7 +24,7 @@ public:
     /**************************************************************************/
     Frog (int _id, int _gender, int _pos); // Construtor
     void set_lake (Lake *_lake);           // Define a lagoa
-    int can_move ();                       // Devolve a distancia da pedra de destino
+    int can_move ();                       // Devolve a distancia que pode pular
     void move (int dist);                  // Move o sapo dist pedras
 };
 

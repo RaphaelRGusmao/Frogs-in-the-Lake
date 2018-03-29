@@ -33,7 +33,7 @@ uint64_t getTime ()
 int simulate (int N, int M)
 {
     uint64_t beginning = getTime();
-    V(cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Inicio ]" << END << endl;)
+    V(cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Inicio ]" << END << endl;)
 
     // Inicializa a lagoa e cria os sapos
     Lake lake(N, M);
@@ -72,7 +72,7 @@ int simulate (int N, int M)
         }
     }
 
-    // Mostra as posições do lago e as posições em que estavam os sapos e rãs no
+    // Mostra as posicoes do lago e as posicoes em que estavam os sapos e ras no
     // fim da simulação
     if (!silent) {
         cout << "Estado final da lagoa:" << endl;
@@ -80,7 +80,7 @@ int simulate (int N, int M)
         cout << endl;
     }
 
-    // Checa se a lagoa está no estado ideal (ras e sapos trocaram de lugar)
+    // Checa se a lagoa esta no estado ideal (ras e sapos trocaram de lugar)
     int ideal = 1;
     for (int i = 0; i < lake.length; i++) {
         if (i < lake.M) {
@@ -108,10 +108,10 @@ int simulate (int N, int M)
     uint64_t finish = getTime();
     uint64_t total_time = finish - beginning;
     if (!silent) {
-        printf("Tempo de execucao: %lu nanosegundos\n", total_time);
+        printf("Tempo de execucao: %lu nanossegundos\n", total_time);
     }
 
-    V(cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Fim ]" << END << endl;)
+    V(cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Fim ]" << END << endl;)
 
     return ideal;
 }
@@ -147,7 +147,6 @@ int main (int argc, char const *argv[])
     }
 
     return simulate(nm[0], nm[1]);
-
 }
 
 /******************************************************************************/

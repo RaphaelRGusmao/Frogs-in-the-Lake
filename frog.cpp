@@ -42,7 +42,7 @@ int Frog::can_move ()
         if (pos-1 >= 0 && lake->stone[pos-1] < 0)
             return -1; // Pode andar uma pedra para a esquerda
         if (pos-2 >= 0 && lake->stone[pos-2] < 0)
-            return -2; // Pode andar duas pedra para a esquerda
+            return -2; // Pode andar duas pedras para a esquerda
     }
     return 0; // Nenhum movimento disponivel
 }
@@ -71,10 +71,11 @@ void FROG_move_sync (Lake *lake)
             printf("Nenhuma thread pode prosseguir. %d deadlocks\n", lake->length-1);
         }
 
+        // Contador
         if (contador > (lake->length-1)*2) {
             game_over = 1;
             if (!lake->silent) {
-                printf("Número máximo de deadlocks atingido: %d deadlocks\n", ((lake->length-1)*2)+1);
+                printf("Numero maximo de deadlocks atingido: %d deadlocks\n", ((lake->length-1)*2)+1);
             }
         }
     }

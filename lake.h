@@ -19,7 +19,7 @@
     #define V(X)
 #endif
 
-// variável global indicadora de se deve ou não imprimir o estado final do programa
+// Variavel global indicadora de se deve ou nao imprimir o estado final do programa
 static int silent = 0;
 
 #include "frog.h"
@@ -42,7 +42,7 @@ public:
     int M;                 // Número de sapos
     int length;            // Tamanho da lagoa
     /**************************************************************************/
-    Lake (int N, int M);                        // Construtor
+    Lake (int N, int M);                   // Construtor
     void show ();                          // Exibe a lagoa
     void set_frogs (vector<Frog> &_frogs); // Define o vetor de sapos
     void set_position (int id, int pos);   // Coloca o sapo id na posicao pos

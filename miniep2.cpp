@@ -11,27 +11,22 @@
 #include <stdint.h>
 #include <time.h>
 #include "lake.h"
-
-
 #include "frog.h"
 using namespace std;
 
-
-/** 
- * Função que retorna o tempo atual em nano segundos.
- * Gentilmente sedida pelo monitor da disciplina.
- * 
- * @author Marcos Amarís González 
- **/
-static inline uint64_t getTime(void) {
+/******************************************************************************/
+// Retorna o tempo atual em nanossegundos
+uint64_t getTime ()
+{
     struct timespec time;
     clock_gettime(CLOCK_REALTIME, &time);
-    return ((uint64_t)(time.tv_sec)*1000000000 + (uint64_t)(time.tv_nsec));
+    return (uint64_t)(time.tv_sec)*1000000000 + (uint64_t)(time.tv_nsec);
 }
-
 
 /******************************************************************************/
 // Realiza a simulacao
+// Retorna 1 se o programa terminou em um estado ideal (solucao),
+//         0 caso contrario
 int simulate (int N, int M)
 {
     uint64_t beginning = getTime();
@@ -54,7 +49,7 @@ int simulate (int N, int M)
     }
     lake.set_frogs(frogs);
 
-    V(lake.show();)                                                                // TODO
+    V(lake.show();)
 
     // Cria as threads
     vector<pthread_t> threads(N+M);
@@ -75,8 +70,9 @@ int simulate (int N, int M)
 
     // Mostra as posições do lago e as posições em que estavam os sapos e rãs no fim da simulação
     if (!silent) {
-        printf("Estado final da lagoa\n");
-        lake.show();                                                                // TODO
+        cout << "Estado final da lagoa:" << endl;
+        lake.show();
+        cout << endl;
     }
 
 
@@ -84,19 +80,19 @@ int simulate (int N, int M)
     int ideal = 1;
     for (int i = 0; i < lake.length; i++) {
         if (i < lake.M) {
-            // parte esquerda da lagoa, onde deve haver apenas sapos
+            // Parte esquerda da lagoa, onde deve haver apenas sapos
             if (lake.stone[i] == -1 || lake.frogs[lake.stone[i]].gender != 1) {
                 ideal = 0;
                 break;
             }
         }
         if (i == lake.M && lake.stone[i] != -1) {
-            // há um animal no meio da lagoa
+            // Ha um animal no meio da lagoa
             ideal = 0;
             break;
         }
         if (i > lake.M) {
-            // parte direita da lagora, onde deve haver apenas ras
+            // Parte direita da lagoa, onde deve haver apenas ras
             if (lake.stone[i] == -1 || lake.frogs[lake.stone[i]].gender != 0) {
                 ideal = 0;
                 break;
@@ -104,7 +100,7 @@ int simulate (int N, int M)
         }
     }
 
-    // Calcula e mostra o tempo de execução da simulação
+    // Calcula e mostra o tempo de execucao da simulacao
     uint64_t finish = getTime();
     uint64_t total_time = finish - beginning;
     if (!silent) {
@@ -114,7 +110,7 @@ int simulate (int N, int M)
     V(cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Fim ]" << END << endl;)
 
     /*
-    De fato a gente ficou com a mesma dúvida, daí combinamos que seria legal se o programa também imprimisse a seguinte informação. 
+    De fato a gente ficou com a mesma dúvida, daí combinamos que seria legal se o programa também imprimisse a seguinte informação.
 
     1. Número de tentativas que o programa ficou em deadlock. Antes de encontrar a solução correta.
     2. O tempo total gasto do programa
@@ -129,14 +125,12 @@ int simulate (int N, int M)
 
     Pro desafio o Makefile pode compilar e executar o programa.*/
 
-    // Retorna 1 se o programa terminou em um estado ideal (solução)
-    // Retorna 0 se o programa terminou em un estado não ideal
     return ideal;
 }
 
 /******************************************************************************/
 // Funcao principal
-// Recebe o número de rãs (N) e o número de sapos (M), nesta ordem
+// Recebe o numero de ras (N) e o numero de sapos (M), nesta ordem
 int main (int argc, char const *argv[])
 {
     if (argc < 2) {
@@ -166,7 +160,7 @@ int main (int argc, char const *argv[])
             printf("Erro ao converter argumentos para int\n");
             return(1);
         } else {
-            nm[i] = conv;    
+            nm[i] = conv;
         }
     }
 
@@ -174,7 +168,6 @@ int main (int argc, char const *argv[])
     // nm[1]  Sapos (gender: 1)
 
     return simulate(nm[0], nm[1]);
-
 
     // return 0;
 }

@@ -1,3 +1,13 @@
+################################################################################
+#                                IME-USP (2018)                                #
+#            MAC0219 - Programacao Concorrente e Paralela - MiniEP2            #
+#                                                                              #
+#                                    Testes                                    #
+#                                                                              #
+#                       Marcelo Schmitt   - NUSP 9297641                       #
+#                       Raphael R. Gusmao - NUSP 9778561                       #
+################################################################################
+
 ras=2
 sapos=2
 execucoes=105
@@ -22,3 +32,4 @@ echo 'peso percentual de cada execucao: '$porcent'%'
 porcent_ideal=$(echo "scale=5; $porcent * $solucoes" | bc)
 echo 'porcentagem de vezes no final ideal: '$porcent_ideal'%'
 
+################################################################################

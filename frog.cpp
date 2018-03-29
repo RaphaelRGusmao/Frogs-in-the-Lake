@@ -85,16 +85,16 @@ void *FROG_thread (void *p_frog)
     Frog frog = *((Frog*)p_frog);
     while (1) {
         frog.lake->lock(); // --------------------------- Inicio da area critica
-        V(cout << endl << "* Sapo " << frog.id << endl;)                           // TODO
+        V(cout << endl << "* Sapo " << frog.id << endl;)
         int dist = frog.can_move();
         if (dist != 0) {
-            V(cout << "  De " << frog.pos << " para " << frog.pos+dist << endl;)   // TODO
+            V(cout << "  De " << frog.pos << " para " << frog.pos+dist << endl;)
             frog.move(dist);
             V(frog.lake->show();)
             contador = 0;
         } else {
             contador++;
-            V(cout << "  Parado - contador: " << contador << endl;)                // TODO
+            V(cout << "  Parado - contador: " << contador << endl;)
         }
         frog.lake->unlock(); // ---------------------------- Fim da area critica
 

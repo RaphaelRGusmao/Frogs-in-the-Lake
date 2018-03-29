@@ -4,18 +4,28 @@
 #                                                                              #
 #                                  Relatorio                                   #
 #                                                                              #
-#                       Marcelo Schmitt   - NUSP ???????                       #
+#                       Marcelo Schmitt   - NUSP 9297641                       #
 #                       Raphael R. Gusmao - NUSP 9778561                       #
 ################################################################################
 
-
+[digite aqui o relatorio]
 
 Para executar o MiniEP2 no terminal, digite:
     $ make
-    $ ./miniep2
+    $ ./miniep2 3 3
 
 Exemplo de saida:
 ________________________________________________________________________________
+Estado final da lagoa:
+
+  0 1 2 3 4 5
+0 1 2 3 4 5 6
+
+Tempo de execucao: 1997666 nanosegundos
 ________________________________________________________________________________
+
+Obs:
+    A primeira linha da lagoa mostra os animais (Sapos em verde, Ras em rosa)
+    A segunda linha mostra os numeros das pedras da lagoa
 
 ################################################################################

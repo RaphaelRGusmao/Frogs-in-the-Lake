@@ -16,6 +16,7 @@ using namespace std;
 static pthread_barrier_t barrier; // Barreira de sincronizacao
 static pthread_mutex_t mutex;     // Semaforo
 
+
 /******************************************************************************/
 Lake::Lake (int _N, int _M)
 {
@@ -84,6 +85,16 @@ void Lake::lock ()
 void Lake::unlock ()
 {
     pthread_mutex_unlock(&mutex);
+}
+
+/******************************************************************************/
+int Lake::is_silent() {
+    return silent;
+}
+
+/******************************************************************************/
+void Lake::set_silent(int _silent) {
+    silent = _silent;
 }
 
 /******************************************************************************/

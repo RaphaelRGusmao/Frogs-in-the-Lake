@@ -8,24 +8,36 @@
 #                       Raphael R. Gusmao - NUSP 9778561                       #
 ################################################################################
 
-[digite aqui o relatorio]
 
-Para executar o MiniEP2 no terminal, digite:
-    $ make
-    $ ./miniep2 3 3
+O programa para por duas condicoes: 
+1- Nenhuma thread pode prosseguir
+2- O numero maximo de deadlocks foi atingido
 
-Exemplo de saida:
-________________________________________________________________________________
-Estado final da lagoa:
 
-  0 1 2 3 4 5
-0 1 2 3 4 5 6
+A cada ciclo de execução eh checado se cada um dos animais pode se mover (isto
+eh, tem um espaco vago na pedra a sua frente ou duas pedras a frente). Se
+nenhum dos animais pode se mover entao o programa para a sua execucao. 
 
-Tempo de execucao: 1997666 nanosegundos
-________________________________________________________________________________
+O valor do contador (numero maximo de deadlocks) que usamos para dizer se o 
+sistema entrou em deadlock foi igual a duas vezes o numero de animais na lagoa, 
+mais um. Por exemplo: se a logoa tem 2 sapos e 2 ras entao o programa encerra 
+por deadlock quando o contador de deadlocks estiver em 9. Escolhemos esse valor
+para o contador porque se ocorrerem (N + M)*2 + 1 deadlocks seguidos e nesta
+situacao eh muito provavel que nao haja meio das threads prosseguirem. 
 
-Obs:
-    A primeira linha da lagoa mostra os animais (Sapos em verde, Ras em rosa)
-    A segunda linha mostra os numeros das pedras da lagoa
+Implementamos o controle de threads usando barreira de sincronizacao serial.
+O programa chegou a situacoes ideais (onde sapos e ras trocaram de lado) apenas
+nos casos de 2 ras e 2 sapos e ainda assim com uma baixa porcentagem de vezes
+terminando no estado ideal (em media apenas 0.22% das execucoes). Para varias 
+outras configuracoes (3 ras, 3 sapos), (6 ras, 6 sapos), (10 ras, 10 sapos), 
+..., nao conseguimos evidenciar uma execucao que terminou no estado ideal.
 
-################################################################################
+Acreditamos que isso se da por causa que a execucao das threads deve ser muito 
+bem alternada para levar ao estado ideal. Contudo, nao forcamos a correta 
+alternancia entre a execucao das threads (pois como discutido em aula, nao 
+deveriamos controlar a ordem em que as threads executam). Outro fator a se 
+considerar eh o fato de o loop das threads dos sapos e ras eh muito pequeno e 
+enxuto, por isso a CPU pode executa-lo varias vezes antes de fazer uma troca de 
+contexto. Assim a ultima thread que chega na barreira provavelmente sera a 
+primeira a executar em seguida, enviezando a alternancia entre threads.
+

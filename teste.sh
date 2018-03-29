@@ -10,10 +10,10 @@
 
 ras=2
 sapos=2
-execucoes=105
+execucoes=10000
 solucoes=0
-resposta=4
-comando='./miniep2 '$ras' '$sapos
+resposta=0
+comando='./miniep2 -s '$ras' '$sapos
 #echo $comando
 contador=0
 while [ $contador -lt $execucoes ]; do

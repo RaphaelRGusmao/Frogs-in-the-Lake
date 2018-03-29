@@ -14,6 +14,9 @@
 #include "frog.h"
 using namespace std;
 
+// Variavel global que indica se deve ou nao imprimir o estado final do programa
+static int silent = 0;
+
 /******************************************************************************/
 // Retorna o tempo atual em nanossegundos
 uint64_t getTime ()
@@ -34,6 +37,7 @@ int simulate (int N, int M)
 
     // Inicializa a lagoa e cria os sapos
     Lake lake(N, M);
+    lake.set_silent(silent);
     vector<Frog> frogs;
     for (int i = 0; i < N; i++) { // Ras
         Frog frog(i, 0, i);
@@ -68,13 +72,13 @@ int simulate (int N, int M)
         }
     }
 
-    // Mostra as posições do lago e as posições em que estavam os sapos e rãs no fim da simulação
+    // Mostra as posições do lago e as posições em que estavam os sapos e rãs no
+    // fim da simulação
     if (!silent) {
         cout << "Estado final da lagoa:" << endl;
         lake.show();
         cout << endl;
     }
-
 
     // Checa se a lagoa está no estado ideal (ras e sapos trocaram de lugar)
     int ideal = 1;
@@ -109,22 +113,6 @@ int simulate (int N, int M)
 
     V(cout << CYAN << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[ Fim ]" << END << endl;)
 
-    /*
-    De fato a gente ficou com a mesma dúvida, daí combinamos que seria legal se o programa também imprimisse a seguinte informação.
-
-    1. Número de tentativas que o programa ficou em deadlock. Antes de encontrar a solução correta.
-    2. O tempo total gasto do programa
-    3. Tabela final com o Id de cada thread e a sua posição na tabela ou vector
-    */
-
-    /*
-
-    Para esse segundo Mini EP, o programa deve aceitar um parâmetro de entrada, que seria o número de pedras ou sapos/râs no instancia do problema a ser executada. Daí o Makefile só vai compilar o programa e o usuário executaría o programa estabelecendo o parâmetro de entrada. Por exemplo.:
-
-    ./frogPuzzle <Numero de Sapos | # Pedroas>, explicitar que clase de parâmetro deveria usar no README.
-
-    Pro desafio o Makefile pode compilar e executar o programa.*/
-
     return ideal;
 }
 
@@ -137,12 +125,6 @@ int main (int argc, char const *argv[])
         printf("Número insuficientes de argumentos\n");
         return -1;
     }
-
-    // printf("argv[1] %s\n", argv[1]);
-    // int aux = 0;
-    // while (argv[aux] != '\0') {
-    //     printf(" %s\n", argv[aux++]);
-    // }
 
     const char *silent_arg = "-s";
     int flags = 0;
@@ -164,12 +146,8 @@ int main (int argc, char const *argv[])
         }
     }
 
-    // nm[0]  Ras   (gender: 0)
-    // nm[1]  Sapos (gender: 1)
-
     return simulate(nm[0], nm[1]);
 
-    // return 0;
 }
 
 /******************************************************************************/

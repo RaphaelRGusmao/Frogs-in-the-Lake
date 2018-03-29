@@ -19,9 +19,6 @@
     #define V(X)
 #endif
 
-// Variavel global indicadora de se deve ou nao imprimir o estado final do programa
-static int silent = 0;
-
 #include "frog.h"
 using namespace std;
 
@@ -41,6 +38,7 @@ public:
     int N;                 // Número de ras
     int M;                 // Número de sapos
     int length;            // Tamanho da lagoa
+    int silent;            // Se não deve imprimir informações adicionais
     /**************************************************************************/
     Lake (int N, int M);                   // Construtor
     void show ();                          // Exibe a lagoa
@@ -49,6 +47,8 @@ public:
     int wait ();                           // Barreira de sincronizacao
     void lock ();                          // Tranca a lagoa
     void unlock ();                        // Destranca a lagoa
+    int is_silent();                       // Retorna se esta no modo silencioso
+    void set_silent(int _silent);          // Define modo silencioso
 };
 
 #endif

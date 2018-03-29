@@ -14,7 +14,6 @@
 using namespace std;
 
 static int contador = 0;  // Contador global
-// static const int max_dead_lock;
 static int game_over = 0; // Indicador de fim de jogo
 
 /******************************************************************************/
@@ -68,11 +67,14 @@ void FROG_move_sync (Lake *lake)
         for (int i = 0; i < lake->length-1; i++) {
             if (lake->frogs[i].can_move()) game_over = 0;
         }
+        if (!lake->silent && game_over == 1) {
+            printf("Nenhuma thread pode prosseguir. %d deadlocks\n", lake->length-1);
+        }
 
-        if (contador > (lake->length-2)*2) {
+        if (contador > (lake->length-1)*2) {
             game_over = 1;
-            if (!silent) {
-                printf("Número de tentativas que o programa ficou em deadlock: %d\n", (lake->length-2)*2);
+            if (!lake->silent) {
+                printf("Número máximo de deadlocks atingido: %d deadlocks\n", ((lake->length-1)*2)+1);
             }
         }
     }
